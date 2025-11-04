@@ -7,8 +7,9 @@ export class Game {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.width = canvas.width;
-    this.height = canvas.height;
+    
+    // 동적 캔버스 크기 설정
+    this.resizeCanvas();
     
     this.particles = new ParticleSystem();
     this.sound = new SoundManager();
@@ -21,6 +22,43 @@ export class Game {
     
   // bind events
     this.bindEvents();
+    
+    // 윈도우 리사이즈 이벤트 추가
+    window.addEventListener('resize', () => this.resizeCanvas());
+  }
+  
+  resizeCanvas() {
+    const container = this.canvas.parentElement;
+    const maxWidth = 500;
+    const maxHeight = 600;
+    
+    // 컨테이너 크기 기준으로 계산
+    const containerWidth = container.offsetWidth || window.innerWidth;
+    const availableWidth = Math.min(containerWidth - 48, maxWidth); // 패딩 고려
+    const availableHeight = Math.min(window.innerHeight - 200, maxHeight); // 여유 공간 고려
+    
+    // 비율 유지하며 크기 조정
+    const aspectRatio = maxWidth / maxHeight;
+    let newWidth = availableWidth;
+    let newHeight = newWidth / aspectRatio;
+    
+    if (newHeight > availableHeight) {
+      newHeight = availableHeight;
+      newWidth = newHeight * aspectRatio;
+    }
+    
+    this.canvas.width = Math.floor(newWidth);
+    this.canvas.height = Math.floor(newHeight);
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+    
+    // 플레이어 위치 재조정
+    if (this.player) {
+      this.player.y = this.height - 70;
+      // x 위치도 비율에 맞춰 조정
+      const xRatio = this.player.x / (this.width || 500);
+      this.player.x = Math.max(0, Math.min(this.width - this.player.width, xRatio * this.width));
+    }
   }
   
   reset() {
