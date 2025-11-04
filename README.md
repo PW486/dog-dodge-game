@@ -1,36 +1,19 @@
-# 회피 게임 (간단한 HTML/CSS/JS 데모)
+## Puppy Dodge Game
 
-간단한 캔버스 기반 회피 게임입니다. 플레이어는 좌/우로 이동하여 떨어지는 장애물을 피해야 합니다.
+### How to play
 
-사용법:
+- Move left: Left Arrow
+- Move right: Right Arrow
+- Restart after game over: Press `R`, `Space`, or click the Restart button
+- Touch controls: On touch devices, on-screen left/right buttons appear automatically; you can also tap the left/right side of the canvas
 
-- 브라우저에서 `index.html` 파일을 열면 바로 실행됩니다.
-- (권장) 로컬 서버에서 실행하려면 아래와 같이 간단한 HTTP 서버를 사용하세요.
+### Gameplay notes
 
-  Python 3 사용 예:
+- Avoid falling obstacles. Each obstacle you successfully dodge gives +10 points.
+- Levels increase as your score grows, making obstacles spawn faster.
+- High score is saved in your browser's localStorage.
 
-  ```bash
-  # macOS / Linux
-  python3 -m http.server 8000
-  # 그런 다음 http://localhost:8000 로 접속하세요
-  ```
+### Quick run
 
-조작법:
-- ← / → : 좌우 이동
-- R 또는 화면 클릭: 게임 오버 후 재시작
-
-추가된 기능(이번 버전):
-
-- 터치 UX 개선: 화면 하단에 좌/우 버튼이 표시되어 모바일에서 누르고 있으면 연속 이동 가능합니다. 또한 캔버스 화면의 좌/우 터치로도 이동할 수 있습니다.
-- 사운드 효과: 점수 획득과 충돌 시 간단한 사운드가 재생됩니다(WebAudio API 사용). 브라우저 환경에 따라 권한 요청이 필요할 수 있습니다.
-- 난이도/레벨: 점수에 따라 레벨이 오르고 장애물 속도와 스폰 속도가 증가합니다. HUD에 레벨이 표시됩니다.
-- 최고점수 저장: `localStorage`에 최고점(최고점)이 저장되어 HUD에 표시됩니다.
-- 파티클 효과: 충돌 및 장애물 제거 시 간단한 파티클 효과가 그려집니다.
-
-버그 수정:
-- 충돌 메시지가 세로로 보이던 문제를 수정했습니다. (`#message`를 HUD 내부가 아닌 `.game-area` 기준 중앙에 위치하도록 변경)
-
-구성 파일:
-- `index.html` : 게임 실행 페이지 (터치 버튼 및 메시지 위치 수정)
-- `styles.css` : 스타일(터치 버튼, 메시지 스타일 추가)
-- `script.js` : 게임 로직(사운드, 레벨, 파티클, 최고점 저장 등 추가)
+- Link: https://pw486.github.io/puppy-dodge-game
+- Open `index.html` in a modern browser.
