@@ -8,23 +8,16 @@ export class Game {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     
-    // 동적 캔버스 크기 설정
-    this.resizeCanvas();
+  this.resizeCanvas();
     
     this.particles = new ParticleSystem();
     this.sound = new SoundManager();
-    
-  // game state
     this.reset();
     
-  // input state
     this.keys = { left: false, right: false };
-    
-  // bind events
     this.bindEvents();
     
-    // 윈도우 리사이즈 이벤트 추가
-    window.addEventListener('resize', () => this.resizeCanvas());
+  window.addEventListener('resize', () => this.resizeCanvas());
   }
   
   resizeCanvas() {
@@ -32,12 +25,10 @@ export class Game {
     const maxWidth = 500;
     const maxHeight = 600;
     
-    // 컨테이너 크기 기준으로 계산
-    const containerWidth = container.offsetWidth || window.innerWidth;
-    const availableWidth = Math.min(containerWidth - 48, maxWidth); // 패딩 고려
-    const availableHeight = Math.min(window.innerHeight - 200, maxHeight); // 여유 공간 고려
-    
-    // 비율 유지하며 크기 조정
+  const containerWidth = container.offsetWidth || window.innerWidth;
+    const availableWidth = Math.min(containerWidth - 48, maxWidth);
+    const availableHeight = Math.min(window.innerHeight - 200, maxHeight);
+
     const aspectRatio = maxWidth / maxHeight;
     let newWidth = availableWidth;
     let newHeight = newWidth / aspectRatio;
@@ -52,10 +43,8 @@ export class Game {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     
-    // 플레이어 위치 재조정
     if (this.player) {
       this.player.y = this.height - 70;
-      // x 위치도 비율에 맞춰 조정
       const xRatio = this.player.x / (this.width || 500);
       this.player.x = Math.max(0, Math.min(this.width - this.player.width, xRatio * this.width));
     }
@@ -71,15 +60,13 @@ export class Game {
     this.lastTime = null;
     this.gameOver = false;
     
-  // high score
     this.highScore = storage.get('dodge_highscore', 0);
     this.newHighScore = false;
-    
     this.updateHUD();
   }
   
   bindEvents() {
-    window.addEventListener('keydown', e => {
+  window.addEventListener('keydown', e => {
       if (e.code === 'ArrowLeft') this.keys.left = true;
       if (e.code === 'ArrowRight') this.keys.right = true;
       if ((e.code === 'KeyR' || e.code === 'Space') && this.gameOver) this.reset();
@@ -130,13 +117,12 @@ export class Game {
   
   update(dt) {
     if (this.gameOver) return;
-    
-  // player movement
+
     if (this.keys.left) this.player.move(-1, dt);
     if (this.keys.right) this.player.move(1, dt);
     this.player.x = Math.max(5, Math.min(this.width - this.player.width - 5, this.player.x));
     
-  // spawn obstacles
+  
     this.lastSpawn += dt * 1000;
     if (this.lastSpawn > this.spawnInterval) {
       this.spawnObstacle();
@@ -144,7 +130,7 @@ export class Game {
       if (this.spawnInterval > 350) this.spawnInterval *= 0.98;
     }
     
-  // update obstacles and check collisions
+  
     for (let i = this.obstacles.length - 1; i >= 0; i--) {
       const obstacle = this.obstacles[i];
       const removed = obstacle.update(dt);
@@ -197,25 +183,20 @@ export class Game {
       }
     }
     
-    // particles update
     this.particles.update(dt);
   }
   
   draw() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    
-  // player
+
     this.player.draw(this.ctx);
-    
-    // obstacles
+
     for (const obstacle of this.obstacles) {
       obstacle.draw(this.ctx);
     }
-    
-  // particles
+
     this.particles.draw(this.ctx);
-    
-    // game over overlay
+
     if (this.gameOver) {
       this.ctx.fillStyle = 'rgba(0,0,0,0.4)';
       this.ctx.fillRect(0, 0, this.width, this.height);

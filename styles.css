@@ -3,28 +3,26 @@ html { height:100%; background-color: #0f172a; }
 html, body { height:100%; }
 body {
   margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  /* solid background color (no gradient) */
   background-color: #0f172a;
   color:#e6eef8; display:flex; align-items:center; justify-content:center;
-  /* Respect iPhone safe areas when status bar is translucent (black-translucent) */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
 .wrap { text-align:center; width:100%; max-width:540px; padding:24px; }
 h1 {
-  font-size: 24px; /* default size */
+  font-size: 24px;
 }
 
 @media (max-width: 600px) {
   h1 {
-    font-size: 24px; /* mobile size */
+    font-size: 24px;
   }
   .wrap {
-    padding: 12px; /* reduce padding on mobile */
+    padding: 12px;
   }
   .game-area {
-    width: 100%; /* adjust game screen for mobile */
-    overflow: hidden; /* prevent scrolling */
+    width: 100%;
+    overflow: hidden;
   }
 }
 .instructions { margin:0 0 24px; color:#9fb0d6; }
@@ -74,7 +72,6 @@ canvas { background:#0f172a; border:4px solid rgba(255,255,255,0.06); display:bl
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
-/* Center the message inside the game area */
 .game-area #message { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.85); padding:0px 24px 18px 24px; border-radius:10px; white-space:nowrap; text-align:center; }
 .game-area #message.hidden { display:none; }
 .game-area #message .play-button { margin-top:12px; padding:12px 28px; }

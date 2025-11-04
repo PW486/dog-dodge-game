@@ -7,12 +7,10 @@ export function collision(a, b) {
   );
 }
 
-// Format score as a string with commas and padding
 export function formatScore(score) {
   return score.toString().padStart(6, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-// localStorage wrapper
 export const storage = {
   get: (key, defaultValue) => {
     try {

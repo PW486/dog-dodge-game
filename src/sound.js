@@ -1,4 +1,3 @@
-// Sound manager
 export class SoundManager {
   constructor() {
     this.audioCtx = null;

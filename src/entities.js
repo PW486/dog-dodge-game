@@ -15,7 +15,6 @@ export class Sprite {
     
     ctx.save();
     ctx.translate(x + w/2, y + h/2);
-  // small bounce effect
     const bounce = Math.sin(Date.now() / 150) * 2;
     ctx.translate(0, bounce);
     ctx.drawImage(this.image, -w/2, -h/2, w, h);
@@ -69,6 +68,6 @@ export class Obstacle extends Entity {
 
   update(dt) {
     this.y += this.speed * dt;
-    return this.y > 800; // whether it went off-screen
+  return this.y > 800;
   }
 }
