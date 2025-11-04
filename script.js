@@ -57,8 +57,12 @@ class BoneParticle {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.vx = (Math.random() - 0.5) * 20;
-    this.vy = (Math.random() - 0.5) * 20 - 10;
+    this.vx = (Math.random() - 0.5) * 15;
+    this.vy = (Math.random() - 0.5) * 15 - (isGameOver ? 15 : 5);
+    const speed = isGameOver ? 30 : 15;
+    this.rotationSpeed = (Math.random() - 0.5) * (isGameOver ? 0.8 : 0.4);
+    this.alpha = 1;
+    this.size = isGameOver ? 25 + Math.random() * 15 : 15 + Math.random() * 10;
     this.rotation = Math.random() * Math.PI * 2;
     this.rotationSpeed = (Math.random() - 0.5) * 0.4;
     this.alpha = 1;
@@ -346,7 +350,7 @@ canvas.addEventListener('touchend',()=>{ keys.left=false; keys.right=false; });
 
 function createBoneParticles() {
   for (let i = 0; i < 10; i++) {
-    particles.push(new BoneParticle(player.x + player.w/2, player.y + player.h/2));
+     particles.push(new BoneParticle(player.x + player.w/2, player.y + player.h/2, true));
   }
 }
 
