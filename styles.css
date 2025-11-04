@@ -5,7 +5,19 @@ body {
   background: linear-gradient(180deg,#0f172a,#071022); color:#e6eef8; display:flex; align-items:center; justify-content:center;
 }
 .wrap { text-align:center; width:100%; max-width:540px; padding:24px; }
-h1 { margin:0 0 8px; font-size:24px; color:#fff; }
+h1 {
+  font-size: 24px; /* 기본 크기 */
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 20px; /* 모바일에서의 크기 */
+  }
+  .game-area {
+    width: 100%; /* 게임 화면을 모바일에 맞게 조정 */
+    overflow: hidden; /* 스크롤 방지 */
+  }
+}
 .instructions { margin:0 0 36px; color:#9fb0d6; }
 .game-area { position:relative; display:inline-block; }
 canvas { background:#071024; border:4px solid rgba(255,255,255,0.06); display:block; border-radius:8px; }
