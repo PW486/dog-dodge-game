@@ -11,7 +11,7 @@ h1 {
 
 @media (max-width: 600px) {
   h1 {
-    font-size: 20px; /* 모바일에서의 크기 */
+    font-size: 22px; /* 모바일에서의 크기 */
   }
   .wrap {
     padding: 12px; /* 모바일에서 패딩 줄임 */
