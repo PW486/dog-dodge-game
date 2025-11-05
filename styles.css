@@ -24,13 +24,11 @@ body {
 .wrap { text-align:center; width:100%; max-width:540px; padding:24px; }
 h1 {
   font-size: 24px;
-  margin-top: 18px;
 }
 
 @media (max-width: 600px) {
   h1 {
     font-size: 24px;
-    margin-top: 18px;
   }
   .wrap {
     padding: 12px;
